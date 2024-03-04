@@ -294,18 +294,18 @@ const config: {
       synthetic: true,
     },
   },
-  "core-testnet": {
+  ["core-testnet"]: {
     WCORE: {
-      deploy:true,
+      deploy: true,
       decimals: 18,
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
     },
-    WETH: {
-      decimals: 18,
-      transferGasLimit: 200 * 1000,
-      deploy: true
-    },
+    // WETH: {
+    //   decimals: 18,
+    //   transferGasLimit: 200 * 1000,
+    //   deploy: true
+    // },
     WBTC: {
       decimals: 8,
       transferGasLimit: 200 * 1000,
@@ -316,23 +316,24 @@ const config: {
       decimals: 9,
     },
     BONK: {
-      synthetic: true,
+      deploy: true,
+      transferGasLimit: 200 * 1000,
       decimals: 5,
     },
-    USDC: {
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      deploy:true,
-    },
-    USDT: {
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      deploy:true,
-    },
+    // USDC: {
+    //   decimals: 6,
+    //   transferGasLimit: 200 * 1000,
+    //   deploy: true,
+    // },
+    // USDT: {
+    //   decimals: 6,
+    //   transferGasLimit: 200 * 1000,
+    //   deploy: true,
+    // },
   },
   arbFork: {
     WCORE: {
-      deploy:true,
+      deploy: true,
       decimals: 18,
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
@@ -354,17 +355,17 @@ const config: {
     USDC: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
-      deploy:true,
+      deploy: true,
     },
     USDT: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
-      deploy:true,
+      deploy: true,
     },
   },
   polygonFork: {
     WCORE: {
-      deploy:true,
+      deploy: true,
       decimals: 18,
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
@@ -386,12 +387,12 @@ const config: {
     USDC: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
-      deploy:true,
+      deploy: true,
     },
     USDT: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
-      deploy:true,
+      deploy: true,
     },
   },
   avalancheFuji: {

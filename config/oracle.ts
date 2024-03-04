@@ -237,7 +237,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
         },
       },
     },
-    "core-testnet": {
+    ["core-testnet"]: {
       //pyth contracts: https://docs.pyth.network/price-feeds/contract-addresses/evm
       pyth: "0x8D254a21b3C86D32F7179855531CE99164721933",
       signers: ["0x0F711379095f2F0a6fdD1e8Fccd6eBA0833c1F1f"],
@@ -253,19 +253,19 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             address: "0x0000000000000000000000000000000000000000",
             priceFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
             expo: -8,
-            decimals: 8,
+            decimals: 18,
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
-        WETH: {
-          priceFeed: {
-            address: "0x0000000000000000000000000000000000000000",
-            priceFeedId: "0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
-            expo: -8,
-            decimals: 8,
-            heartbeatDuration: (24 + 1) * 60 * 60,
-          },
-        },
+        // WETH: {
+        //   priceFeed: {
+        //     address: "0x0000000000000000000000000000000000000000",
+        //     priceFeedId: "0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
+        //     expo: -8,
+        //     decimals: 8,
+        //     heartbeatDuration: (24 + 1) * 60 * 60,
+        //   },
+        // },
         WBTC: {
           priceFeed: {
             address: "0x0000000000000000000000000000000000000000",
@@ -280,7 +280,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             address: "0x0000000000000000000000000000000000000000",
             priceFeedId: "0xef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d",
             expo: -8,
-            decimals: 8,
+            decimals: 9,
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
@@ -293,26 +293,26 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
-        USDC: {
-          priceFeed: {
-            address: "0x0000000000000000000000000000000000000000",
-            priceFeedId: "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a",
-            expo: -8,
-            decimals: 8,
-            heartbeatDuration: (24 + 1) * 60 * 60,
-            stablePrice: decimalToFloat(1),
-          },
-        },
-        USDT: {
-          priceFeed: {
-            address: "0x0000000000000000000000000000000000000000",
-            priceFeedId: "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
-            expo: -8,
-            decimals: 8,
-            heartbeatDuration: (24 + 1) * 60 * 60,
-            stablePrice: decimalToFloat(1),
-          },
-        },
+        // USDC: {
+        //   priceFeed: {
+        //     address: "0x0000000000000000000000000000000000000000",
+        //     priceFeedId: "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a",
+        //     expo: -8,
+        //     decimals: 8,
+        //     heartbeatDuration: (24 + 1) * 60 * 60,
+        //     stablePrice: decimalToFloat(1),
+        //   },
+        // },
+        // USDT: {
+        //   priceFeed: {
+        //     address: "0x0000000000000000000000000000000000000000",
+        //     priceFeedId: "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
+        //     expo: -8,
+        //     decimals: 8,
+        //     heartbeatDuration: (24 + 1) * 60 * 60,
+        //     stablePrice: decimalToFloat(1),
+        //   },
+        // },
        
       },
     },

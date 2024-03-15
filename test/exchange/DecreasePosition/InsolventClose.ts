@@ -172,45 +172,44 @@ describe("Exchange.DecreasePosition.InsolventClose", () => {
       market: ethUsdMarket,
       collateralToken: usdc,
       isLong: true,
-      minPrices: [prices.wnt.increased.min, 1],
-      maxPrices: [prices.wnt.increased.max, 1],
+      prices: [5020, 1],
     });
 
-    // const timeKey = await getClaimableCollateralTimeKey();
+    const timeKey = await getClaimableCollateralTimeKey();
 
-    // expect(
-    //   await dataStore.getUint(
-    //     keys.claimableCollateralAmountKey(ethUsdMarket.marketToken, wnt.address, timeKey, user2.address)
-    //   )
-    // ).eq(0);
+    expect(
+      await dataStore.getUint(
+        keys.claimableCollateralAmountKey(ethUsdMarket.marketToken, wnt.address, timeKey, user2.address)
+      )
+    ).eq(0);
 
-    // expect(
-    //   await dataStore.getUint(
-    //     keys.claimableCollateralAmountKey(ethUsdMarket.marketToken, usdc.address, timeKey, user2.address)
-    //   )
-    // ).eq(0);
+    expect(
+      await dataStore.getUint(
+        keys.claimableCollateralAmountKey(ethUsdMarket.marketToken, usdc.address, timeKey, user2.address)
+      )
+    ).eq(0);
 
-    // expect(await wnt.balanceOf(user1.address)).eq(0);
-    // expect(await usdc.balanceOf(user1.address)).eq(0);
+    expect(await wnt.balanceOf(user1.address)).eq(0);
+    expect(await usdc.balanceOf(user1.address)).eq(0);
 
-    // expect(await getPoolAmount(dataStore, ethUsdMarket.marketToken, wnt.address)).eq(expandDecimals(1000, 18));
-    // expect(await getPoolAmount(dataStore, ethUsdMarket.marketToken, usdc.address)).eq("999200000001"); // 999,200.000001
+    expect(await getPoolAmount(dataStore, ethUsdMarket.marketToken, wnt.address)).eq(expandDecimals(1000, 18));
+    expect(await getPoolAmount(dataStore, ethUsdMarket.marketToken, usdc.address)).eq("999200000001"); // 999,200.000001
 
-    // await usingResult(
-    //   getMarketTokenPriceWithPoolValue(fixture, { prices: prices.ethUsdMarket }),
-    //   ([marketTokenPrice, poolValueInfo]) => {
-    //     expect(marketTokenPrice).eq("999866666666833333333333333333");
-    //     expect(poolValueInfo.poolValue).eq("5999200000001000000000000000000000000");
-    //   }
-    // );
+    await usingResult(
+      getMarketTokenPriceWithPoolValue(fixture, { prices: prices.ethUsdMarket }),
+      ([marketTokenPrice, poolValueInfo]) => {
+        expect(marketTokenPrice).eq("999866666666833333333333333333");
+        expect(poolValueInfo.poolValue).eq("5999200000001000000000000000000000000");
+      }
+    );
 
-    // await usingResult(
-    //   getMarketTokenPriceWithPoolValue(fixture, { prices: prices.ethUsdMarket.increased }),
-    //   ([marketTokenPrice, poolValueInfo]) => {
-    //     expect(marketTokenPrice).eq("1003213333333500000000000000000");
-    //     expect(poolValueInfo.poolValue).eq("6019280000001000000000000000000000000");
-    //   }
-    // );
+    await usingResult(
+      getMarketTokenPriceWithPoolValue(fixture, { prices: prices.ethUsdMarket.increased }),
+      ([marketTokenPrice, poolValueInfo]) => {
+        expect(marketTokenPrice).eq("1003213333333500000000000000000");
+        expect(poolValueInfo.poolValue).eq("6019280000001000000000000000000000000");
+      }
+    );
   });
 
   it("funding fees > collateral, unable to swap", async () => {
@@ -365,8 +364,7 @@ describe("Exchange.DecreasePosition.InsolventClose", () => {
       market: ethUsdMarket,
       collateralToken: usdc,
       isLong: true,
-      minPrices: [prices.wnt.increased.min, expandDecimals(1, 6)],
-      maxPrices: [prices.wnt.increased.max, expandDecimals(1, 6)],
+      prices: [5020, 1],
     });
 
     const timeKey = await getClaimableCollateralTimeKey();

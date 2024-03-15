@@ -10,22 +10,22 @@ import { OrderType, handleOrder } from "../../../utils/order";
 import { prices, priceFeedPrices } from "../../../utils/prices";
 import * as keys from "../../../utils/keys";
 
-describe.only("Exchange.DecreasePosition", () => {
+describe("Exchange.DecreasePosition", () => {
   let fixture;
   let user0, user1, user2, user3;
-  let dataStore, wnt, usdc, ethUsdMarket;
+  let dataStore, wnt, usdc, ethUsdSingleTokenMarket;
 
   beforeEach(async () => {
     
     fixture = await deployFixture();
 
     ({ user0, user1, user2, user3 } = fixture.accounts);
-    ({ dataStore, wnt, usdc, ethUsdMarket,  } = fixture.contracts);
+    ({ dataStore, wnt, usdc, ethUsdSingleTokenMarket,  } = fixture.contracts);
 
     await handleDeposit(fixture, {
       create: {
-        market: ethUsdMarket,
-        longTokenAmount: expandDecimals(1_000, 18),
+        market: ethUsdSingleTokenMarket,
+        longTokenAmount: expandDecimals(1_000_000, 6),
         shortTokenAmount: expandDecimals(1_000_000, 6),
       },
     });
@@ -37,7 +37,7 @@ describe.only("Exchange.DecreasePosition", () => {
     await handleOrder(fixture, {
       create: {
         account: user0,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: expandDecimals(100_000, 6),
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -50,7 +50,7 @@ describe.only("Exchange.DecreasePosition", () => {
     await handleOrder(fixture, {
       create: {
         account: user1,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: expandDecimals(100_000, 6),
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -70,7 +70,7 @@ describe.only("Exchange.DecreasePosition", () => {
       create: {
         account: user0,
         receiver: user2,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -85,7 +85,7 @@ describe.only("Exchange.DecreasePosition", () => {
       create: {
         account: user1,
         receiver: user3,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -105,20 +105,20 @@ describe.only("Exchange.DecreasePosition", () => {
 
   it("capped pnl", async () => {
     await dataStore.setUint(
-      keys.maxPnlFactorKey(keys.MAX_PNL_FACTOR_FOR_TRADERS, ethUsdMarket.marketToken, true),
+      keys.maxPnlFactorKey(keys.MAX_PNL_FACTOR_FOR_TRADERS, ethUsdSingleTokenMarket.marketToken, true),
       decimalToFloat(7, 2)
     ); // 7%
 
     await dataStore.setUint(
-      keys.maxPnlFactorKey(keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS, ethUsdMarket.marketToken, true),
+      keys.maxPnlFactorKey(keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS, ethUsdSingleTokenMarket.marketToken, true),
       decimalToFloat(5, 1)
     ); // 50%
 
     await usingResult(
       getMarketTokenPriceWithPoolValue(fixture, {
         pnlFactorType: keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS,
-        market: ethUsdMarket,
-        prices: prices.ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
+        prices: prices.ethUsdSingleTokenMarket,
       }),
       ([marketTokenPrice, poolValueInfo]) => {
         expect(marketTokenPrice).eq(decimalToFloat(1));
@@ -129,7 +129,7 @@ describe.only("Exchange.DecreasePosition", () => {
     await handleOrder(fixture, {
       create: {
         account: user0,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: expandDecimals(100_000, 6),
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -142,7 +142,7 @@ describe.only("Exchange.DecreasePosition", () => {
     await handleOrder(fixture, {
       create: {
         account: user1,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: expandDecimals(100_000, 6),
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -155,8 +155,8 @@ describe.only("Exchange.DecreasePosition", () => {
     await usingResult(
       getMarketTokenPriceWithPoolValue(fixture, {
         pnlFactorType: keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS,
-        market: ethUsdMarket,
-        prices: prices.ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
+        prices: prices.ethUsdSingleTokenMarket,
       }),
       ([marketTokenPrice, poolValueInfo]) => {
         expect(marketTokenPrice).eq(decimalToFloat(1));
@@ -173,8 +173,8 @@ describe.only("Exchange.DecreasePosition", () => {
     await usingResult(
       getMarketTokenPriceWithPoolValue(fixture, {
         pnlFactorType: keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS,
-        market: ethUsdMarket,
-        prices: { ...prices.ethUsdMarket.increased.byFiftyPercent },
+        market: ethUsdSingleTokenMarket,
+        prices: { ...prices.ethUsdSingleTokenMarket.increased.byFiftyPercent },
       }),
       ([marketTokenPrice, poolValueInfo]) => {
         expect(marketTokenPrice).eq("875000000000000000000000000000"); // 0.875
@@ -186,7 +186,7 @@ describe.only("Exchange.DecreasePosition", () => {
       create: {
         account: user0,
         receiver: user2,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -200,8 +200,8 @@ describe.only("Exchange.DecreasePosition", () => {
     await usingResult(
       getMarketTokenPriceWithPoolValue(fixture, {
         pnlFactorType: keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS,
-        market: ethUsdMarket,
-        prices: { ...prices.ethUsdMarket.increased.byFiftyPercent },
+        market: ethUsdSingleTokenMarket,
+        prices: { ...prices.ethUsdSingleTokenMarket.increased.byFiftyPercent },
       }),
       ([marketTokenPrice, poolValueInfo]) => {
         expect(marketTokenPrice).eq("920000000000000000000000000000"); // 0.92
@@ -213,7 +213,7 @@ describe.only("Exchange.DecreasePosition", () => {
       create: {
         account: user1,
         receiver: user3,
-        market: ethUsdMarket,
+        market: ethUsdSingleTokenMarket,
         initialCollateralToken: usdc,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(250 * 1000),
@@ -227,8 +227,8 @@ describe.only("Exchange.DecreasePosition", () => {
     await usingResult(
       getMarketTokenPriceWithPoolValue(fixture, {
         pnlFactorType: keys.MAX_PNL_FACTOR_FOR_WITHDRAWALS,
-        market: ethUsdMarket,
-        prices: { ...prices.ethUsdMarket.increased.byFiftyPercent },
+        market: ethUsdSingleTokenMarket,
+        prices: { ...prices.ethUsdSingleTokenMarket.increased.byFiftyPercent },
       }),
       ([marketTokenPrice, poolValueInfo]) => {
         expect(marketTokenPrice).eq("948112500000000000000000000000"); // 0.9481125

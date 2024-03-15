@@ -15,14 +15,11 @@ export async function updateAdlState(fixture, overrides = {}) {
   const { adlHandler } = fixture.contracts;
   const { market, isLong, gasUsageLabel } = overrides;
   const { wnt, usdc } = fixture.contracts;
+  const tokenOracleTypes = overrides.tokenOracleTypes || [TOKEN_ORACLE_TYPES.DEFAULT, TOKEN_ORACLE_TYPES.DEFAULT];
   const tokens = overrides.tokens || [wnt.address, usdc.address];
   const realtimeFeedTokens = overrides.realtimeFeedTokens || [];
-  const realtimeFeedData = overrides.realtimeFeedData || [];
   const priceFeedTokens = overrides.priceFeedTokens || [];
-  const tokenOracleTypes = overrides.tokenOracleTypes || [TOKEN_ORACLE_TYPES.DEFAULT, TOKEN_ORACLE_TYPES.DEFAULT];
-  const precisions = overrides.precisions || [8, 18];
-  const minPrices = overrides.minPrices || [expandDecimals(5000, 4), expandDecimals(1, 6)];
-  const maxPrices = overrides.maxPrices || [expandDecimals(5000, 4), expandDecimals(1, 6)];
+  const prices = overrides.prices || [5000, 1];
 
   const block = await ethers.provider.getBlock();
 
@@ -30,14 +27,13 @@ export async function updateAdlState(fixture, overrides = {}) {
     oracleBlockNumber: bigNumberify(block.number),
     tokens,
     tokenOracleTypes,
-    precisions,
-    minPrices,
-    maxPrices,
+    prices,
     realtimeFeedTokens,
-    realtimeFeedData,
     priceFeedTokens,
     execute: async (key, oracleParams) => {
-      return await adlHandler.updateAdlState(market.marketToken, isLong, oracleParams);
+      return await adlHandler.updateAdlState(market.marketToken, isLong, oracleParams,
+        { value: ethers.BigNumber.from(4) }
+      );
     },
     gasUsageLabel,
   };
@@ -51,24 +47,16 @@ export async function executeAdl(fixture, overrides = {}) {
   const { wnt, usdc } = fixture.contracts;
   const tokens = overrides.tokens || [wnt.address, usdc.address];
   const realtimeFeedTokens = overrides.realtimeFeedTokens || [];
-  const realtimeFeedData = overrides.realtimeFeedData || [];
   const priceFeedTokens = overrides.priceFeedTokens || [];
-  const tokenOracleTypes = overrides.tokenOracleTypes || [TOKEN_ORACLE_TYPES.DEFAULT, TOKEN_ORACLE_TYPES.DEFAULT];
-  const precisions = overrides.precisions || [8, 18];
-  const minPrices = overrides.minPrices || [expandDecimals(5000, 4), expandDecimals(1, 6)];
-  const maxPrices = overrides.maxPrices || [expandDecimals(5000, 4), expandDecimals(1, 6)];
+  const prices = overrides.prices || [5000, 1];
 
   const block = overrides.block || (await ethers.provider.getBlock());
 
   const params = {
     oracleBlockNumber: bigNumberify(block.number),
     tokens,
-    tokenOracleTypes,
-    precisions,
-    minPrices,
-    maxPrices,
+    prices,
     realtimeFeedTokens,
-    realtimeFeedData,
     priceFeedTokens,
     execute: async (key, oracleParams) => {
       return await adlHandler.executeAdl(
@@ -77,7 +65,8 @@ export async function executeAdl(fixture, overrides = {}) {
         collateralToken.address,
         isLong,
         sizeDeltaUsd,
-        oracleParams
+        oracleParams,
+        { value: ethers.BigNumber.from(2) }
       );
     },
     gasUsageLabel,

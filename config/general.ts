@@ -2,54 +2,52 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { decimalToFloat, expandDecimals } from "../utils/math";
 
 export default async function ({ network }: HardhatRuntimeEnvironment) {
-  // if (network.name === "hardhat") {
-  //   // Note that this is only for the hardhat config
-  //   return {
-  //     feeReceiver: ethers.constants.AddressZero,
-  //     holdingAddress: ethers.constants.AddressZero,
-  //     maxUiFeeFactor: decimalToFloat(5, 5), // 0.005%
-  //     minHandleExecutionErrorGas: 1_200_000,
-  //     minHandleExecutionErrorGasToForward: 1_000_000,
-  //     minAdditionalGasForExecution: 1_000_000,
+  if (network.name === "hardhat") {
+    // Note that this is only for the hardhat config
+    return {
+      feeReceiver: ethers.constants.AddressZero,
+      holdingAddress: ethers.constants.AddressZero,
+      maxUiFeeFactor: decimalToFloat(5, 5), // 0.005%
+      minHandleExecutionErrorGas: 1_200_000,
+      minHandleExecutionErrorGasToForward: 1_000_000,
+      minAdditionalGasForExecution: 1_000_000,
 
-  //     depositGasLimitSingle: 0,
-  //     depositGasLimitMultiple: 0,
-  //     withdrawalGasLimit: 0,
+      depositGasLimitSingle: 0,
+      depositGasLimitMultiple: 0,
+      withdrawalGasLimit: 0,
 
-  //     singleSwapGasLimit: 0,
-  //     increaseOrderGasLimit: 0,
-  //     decreaseOrderGasLimit: 0,
-  //     swapOrderGasLimit: 0,
+      singleSwapGasLimit: 0,
+      increaseOrderGasLimit: 0,
+      decreaseOrderGasLimit: 0,
+      swapOrderGasLimit: 0,
 
-  //     tokenTransferGasLimit: 200_000,
-  //     nativeTokenTransferGasLimit: 50_000,
+      tokenTransferGasLimit: 200_000,
+      nativeTokenTransferGasLimit: 50_000,
 
-  //     estimatedGasFeeBaseAmount: 0,
-  //     estimatedGasFeeMultiplierFactor: 0,
+      estimatedGasFeeBaseAmount: 0,
+      estimatedGasFeeMultiplierFactor: 0,
 
-  //     executionGasFeeBaseAmount: 0,
-  //     executionGasFeeMultiplierFactor: 0,
+      executionGasFeeBaseAmount: 0,
+      executionGasFeeMultiplierFactor: 0,
 
-  //     maxSwapPathLength: 5,
-  //     maxCallbackGasLimit: 2_000_000,
-  //     minCollateralUsd: decimalToFloat(1),
+      maxSwapPathLength: 5,
+      maxCallbackGasLimit: 2_000_000,
+      minCollateralUsd: decimalToFloat(1),
 
-  //     minPositionSizeUsd: decimalToFloat(1),
-  //     claimableCollateralTimeDivisor: 60 * 60,
+      minPositionSizeUsd: decimalToFloat(1),
+      claimableCollateralTimeDivisor: 60 * 60,
 
-  //     positionFeeReceiverFactor: 0,
-  //     swapFeeReceiverFactor: 0,
-  //     borrowingFeeReceiverFactor: 0,
+      positionFeeReceiverFactor: 0,
+      swapFeeReceiverFactor: 0,
+      borrowingFeeReceiverFactor: 0,
 
-  //     skipBorrowingFeeForSmallerSide: false,
-  //   };
-  // }
+      skipBorrowingFeeForSmallerSide: false,
+    };
+  }
 
   const generalConfig = {
-    feeReceiver: ethers.constants.AddressZero,
-    holdingAddress: ethers.constants.AddressZero,
-    // feeReceiver: network.name === "hardhat" ? ethers.constants.AddressZero : "0xD0eBa2DB37513399C22CE3ac7b18412a2f8FD789",
-    // holdingAddress: network.name === "hardhat" ? ethers.constants.AddressZero : "0x3f59203ea1c66527422998b54287e1efcacbe2c5",
+    feeReceiver: "0x49FE95FD5C97E79Fdcf5098B3fC43C07C8913d8A",
+    holdingAddress: "0x42a80be7DAf193f5394240c713D95713f00B26e7",
     maxUiFeeFactor: decimalToFloat(2, 4), // 0.0002, 0.02%
     minHandleExecutionErrorGas: 1_200_000,
     minHandleExecutionErrorGasToForward: 1_000_000, // measured gas required for an order cancellation: ~600,000

@@ -100,6 +100,12 @@ contract AdlHandler is BaseOrderHandler, MulticallWithValue {
 
         cache.startingGas = gasleft();
 
+        AdlUtils.validateAdl(
+            dataStore,
+            market,
+            isLong
+        );
+
         (cache.shouldAllowAdl, cache.pnlToPoolFactor, cache.maxPnlFactorForAdl) = MarketUtils.isPnlFactorExceeded(
             dataStore,
             oracle,
@@ -121,7 +127,7 @@ contract AdlHandler is BaseOrderHandler, MulticallWithValue {
                 collateralToken,
                 isLong,
                 sizeDeltaUsd,
-                cache.minOracleBlockNumbers[0]
+                Chain.currentBlockNumber()
             )
         );
 

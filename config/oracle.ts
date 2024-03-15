@@ -109,6 +109,16 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             initPrice: "5000000000000",
           },
         },
+        SOL: {
+          priceFeed: {
+            decimals: 18,
+            priceFeedId: "",
+            expo: -5,
+            heartbeatDuration: 24 * 60 * 60,
+            deploy: true,
+            initPrice: "150000000000",
+          },
+        },
       },
     },
 

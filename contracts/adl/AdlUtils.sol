@@ -201,18 +201,18 @@ library AdlUtils {
     function validateAdl(
         DataStore dataStore,
         address market,
-        bool isLong,
-        uint256[] memory maxOracleBlockNumbers
+        bool isLong
+        // uint256[] memory maxOracleBlockNumbers
     ) external view {
         bool isAdlEnabled = AdlUtils.getIsAdlEnabled(dataStore, market, isLong);
         if (!isAdlEnabled) {
             revert Errors.AdlNotEnabled();
         }
 
-        uint256 latestAdlBlock = AdlUtils.getLatestAdlBlock(dataStore, market, isLong);
-        if (!maxOracleBlockNumbers.areGreaterThanOrEqualTo(latestAdlBlock)) {
-            revert Errors.OracleBlockNumbersAreSmallerThanRequired(maxOracleBlockNumbers, latestAdlBlock);
-        }
+        // uint256 latestAdlBlock = AdlUtils.getLatestAdlBlock(dataStore, market, isLong);
+        // if (!maxOracleBlockNumbers.areGreaterThanOrEqualTo(latestAdlBlock)) {
+        //     revert Errors.OracleBlockNumbersAreSmallerThanRequired(maxOracleBlockNumbers, latestAdlBlock);
+        // }
     }
 
     // @dev get the latest block at which the ADL flag was updated

@@ -1,7 +1,7 @@
-import { bigNumberify, expandDecimals } from "./math";
+
 import { executeWithOracleParams } from "./exchange";
-import { TOKEN_ORACLE_TYPES } from "./oracle";
 import { parseLogs } from "./event";
+import { ethers } from "hardhat";
 
 export async function executeLiquidation(fixture, overrides) {
   const { wnt, usdc } = fixture.contracts;
@@ -9,24 +9,14 @@ export async function executeLiquidation(fixture, overrides) {
   const { liquidationHandler } = fixture.contracts;
   const tokens = overrides.tokens || [wnt.address, usdc.address];
   const realtimeFeedTokens = overrides.realtimeFeedTokens || [];
-  const realtimeFeedData = overrides.realtimeFeedData || [];
   const priceFeedTokens = overrides.priceFeedTokens || [];
-  const tokenOracleTypes = overrides.tokenOracleTypes || [TOKEN_ORACLE_TYPES.DEFAULT, TOKEN_ORACLE_TYPES.DEFAULT];
-  const precisions = overrides.precisions || [8, 18];
-  const minPrices = overrides.minPrices || [expandDecimals(5000, 4), expandDecimals(1, 6)];
-  const maxPrices = overrides.maxPrices || [expandDecimals(5000, 4), expandDecimals(1, 6)];
+  const prices = overrides.prices || [5000, 1];
 
-  const block = await ethers.provider.getBlock();
 
   const params = {
-    oracleBlockNumber: bigNumberify(block.number),
     tokens,
-    tokenOracleTypes,
-    precisions,
-    minPrices,
-    maxPrices,
+    prices,
     realtimeFeedTokens,
-    realtimeFeedData,
     priceFeedTokens,
     execute: async (key, oracleParams) => {
       return await liquidationHandler.executeLiquidation(
@@ -34,11 +24,12 @@ export async function executeLiquidation(fixture, overrides) {
         market.marketToken,
         collateralToken.address,
         isLong,
-        oracleParams
+        oracleParams,
+        { value: ethers.BigNumber.from(2) }
       );
     },
 
-    
+
     gasUsageLabel,
   };
 

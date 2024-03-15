@@ -5,6 +5,7 @@ import { setAddressIfDifferent, setBytes32IfDifferent, setUintIfDifferent } from
 import { hashString } from "../utils/hash";
 
 const func = async ({ gmx, deployments }: HardhatRuntimeEnvironment) => {
+  
   const oracleConfig = await gmx.getOracle();
   const tokens = await gmx.getTokens();
   const { get } = deployments;
@@ -20,7 +21,7 @@ const func = async ({ gmx, deployments }: HardhatRuntimeEnvironment) => {
 
       const oracleTypeKey = keys.oracleTypeKey(token.address);
       await setBytes32IfDifferent(oracleTypeKey, oracleType, "oracle type");
-
+      
       if (!priceFeed) {
         continue;
       }

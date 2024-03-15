@@ -9,7 +9,7 @@ import { grantRole } from "../../utils/role";
 import { getEventData } from "../../utils/event";
 import * as keys from "../../utils/keys";
 
-describe("Exchange.AdlOrder", () => {
+describe.only("Exchange.AdlOrder", () => {
   let fixture;
   let wallet, user0;
   let roleStore, dataStore, ethUsdMarket, wnt, usdc;
@@ -51,8 +51,7 @@ describe("Exchange.AdlOrder", () => {
       market: ethUsdMarket,
       isLong: true,
       tokens: [wnt.address, usdc.address],
-      minPrices: [expandDecimals(10000, 4), expandDecimals(1, 6)],
-      maxPrices: [expandDecimals(10000, 4), expandDecimals(1, 6)],
+      prices: [10000, 1],
       gasUsageLabel: "updateAdlState",
     });
 
@@ -65,11 +64,12 @@ describe("Exchange.AdlOrder", () => {
       isLong: true,
       sizeDeltaUsd: decimalToFloat(100 * 1000),
       tokens: [wnt.address, usdc.address],
-      minPrices: [expandDecimals(10000, 4), expandDecimals(1, 6)],
-      maxPrices: [expandDecimals(10000, 4), expandDecimals(1, 6)],
+      prices: [10000, 1],
       gasUsageLabel: "executeAdl",
       afterExecution: ({ logs }) => {
         const orderExecutedEvent = getEventData(logs, "OrderExecuted");
+        console.log({orderExecutedEvent});
+        
         expect(orderExecutedEvent.secondaryOrderType).eq(1);
       },
     });

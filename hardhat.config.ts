@@ -89,10 +89,10 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       saveDeployments: true,
-      forking: {
-        url: `https://rpc.test.btcs.network`,
-        blockNumber: 16669008,
-      },
+      // forking: {
+      //   url: `https://rpc.test.btcs.network`,
+      //   blockNumber: 16669008,
+      // },
     },
     "core-testnet": {
       url: 'https://rpc.test.btcs.network',

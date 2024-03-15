@@ -6,19 +6,19 @@ import { handleDeposit } from "../../../utils/deposit";
 import { OrderType, getOrderCount, handleOrder } from "../../../utils/order";
 import { getExecuteParams } from "../../../utils/exchange";
 import { getEventData } from "../../../utils/event";
-import { prices } from "../../../utils/prices";
+import { priceFeedPrices, prices } from "../../../utils/prices";
 import * as keys from "../../../utils/keys";
 
 describe("Exchange.PositionPriceImpact.SyntheticMarket", () => {
   let fixture;
   let user0;
-  let dataStore, solUsdMarket, wnt;
+  let dataStore, solUsdMarket, wnt, sol, usdc;
 
   beforeEach(async () => {
     fixture = await deployFixture();
     ({ user0 } = fixture.accounts);
-    ({ dataStore, solUsdMarket, wnt } = fixture.contracts);
-
+    ({ dataStore, solUsdMarket, wnt, sol, usdc } = fixture.contracts);
+    
     await handleDeposit(fixture, {
       create: {
         market: solUsdMarket,
@@ -26,7 +26,7 @@ describe("Exchange.PositionPriceImpact.SyntheticMarket", () => {
         shortTokenAmount: expandDecimals(2000 * 1000, 6),
       },
       execute: {
-        ...getExecuteParams(fixture, { prices: [prices.sol, prices.wnt, prices.usdc] }),
+        ...getExecuteParams(fixture, { tokens: [sol, wnt, usdc], prices: [priceFeedPrices.sol, priceFeedPrices.wnt, priceFeedPrices.usdc] }),
       },
     });
   });
@@ -44,7 +44,7 @@ describe("Exchange.PositionPriceImpact.SyntheticMarket", () => {
       initialCollateralToken: wnt,
       initialCollateralDeltaAmount: expandDecimals(10, 18),
       sizeDeltaUsd: decimalToFloat(200 * 1000),
-      acceptablePrice: expandDecimals(60, 21),
+      acceptablePrice: expandDecimals(60, 12),
       orderType: OrderType.MarketIncrease,
       isLong: true,
     };
@@ -55,7 +55,7 @@ describe("Exchange.PositionPriceImpact.SyntheticMarket", () => {
     await handleOrder(fixture, {
       create: params,
       execute: {
-        ...getExecuteParams(fixture, { prices: [prices.sol, prices.wnt, prices.usdc] }),
+        ...getExecuteParams(fixture, { tokens: [sol, wnt, usdc], prices: [priceFeedPrices.sol, priceFeedPrices.wnt, priceFeedPrices.usdc] }),
         gasUsageLabel: "executeOrder",
         afterExecution: ({ logs }) => {
           const positionIncreaseEvent = getEventData(logs, "PositionIncrease");
@@ -72,10 +72,10 @@ describe("Exchange.PositionPriceImpact.SyntheticMarket", () => {
       create: {
         ...params,
         orderType: OrderType.MarketDecrease,
-        acceptablePrice: expandDecimals(45, 21),
+        acceptablePrice: expandDecimals(45, 12),
       },
       execute: {
-        ...getExecuteParams(fixture, { prices: [prices.sol, prices.wnt, prices.usdc] }),
+        ...getExecuteParams(fixture, { tokens: [sol, wnt, usdc], prices: [priceFeedPrices.sol, priceFeedPrices.wnt, priceFeedPrices.usdc] }),
         gasUsageLabel: "executeOrder",
         afterExecution: ({ logs }) => {
           const positionDecreaseEvent = getEventData(logs, "PositionDecrease");

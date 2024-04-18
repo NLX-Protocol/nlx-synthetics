@@ -301,11 +301,11 @@ const config: {
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
     },
-    // WETH: {
-    //   decimals: 18,
-    //   transferGasLimit: 200 * 1000,
-    //   deploy: true
-    // },
+    WETH: {
+      decimals: 18,
+      transferGasLimit: 200 * 1000,
+      deploy: true
+    },
     WBTC: {
       decimals: 8,
       transferGasLimit: 200 * 1000,

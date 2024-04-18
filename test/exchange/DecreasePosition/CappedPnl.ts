@@ -10,7 +10,7 @@ import { OrderType, handleOrder } from "../../../utils/order";
 import { prices, priceFeedPrices } from "../../../utils/prices";
 import * as keys from "../../../utils/keys";
 
-describe("Exchange.DecreasePosition", () => {
+describe.only("Exchange.DecreasePosition", () => {
   let fixture;
   let user0, user1, user2, user3;
   let dataStore, wnt, usdc, ethUsdSingleTokenMarket;

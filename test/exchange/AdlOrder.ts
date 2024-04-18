@@ -9,7 +9,7 @@ import { grantRole } from "../../utils/role";
 import { getEventData } from "../../utils/event";
 import * as keys from "../../utils/keys";
 
-describe.only("Exchange.AdlOrder", () => {
+describe("Exchange.AdlOrder", () => {
   let fixture;
   let wallet, user0;
   let roleStore, dataStore, ethUsdMarket, wnt, usdc;

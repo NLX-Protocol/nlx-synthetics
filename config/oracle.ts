@@ -111,7 +111,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
         },
         SOL: {
           priceFeed: {
-            decimals: 18,
+            decimals: 9,
             priceFeedId: "",
             expo: -5,
             heartbeatDuration: 24 * 60 * 60,
@@ -267,15 +267,15 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
-        // WETH: {
-        //   priceFeed: {
-        //     address: "0x0000000000000000000000000000000000000000",
-        //     priceFeedId: "0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
-        //     expo: -8,
-        //     decimals: 8,
-        //     heartbeatDuration: (24 + 1) * 60 * 60,
-        //   },
-        // },
+        WETH: {
+          priceFeed: {
+            address: "0x0000000000000000000000000000000000000000",
+            priceFeedId: "0xff61491a931112ddf1bd8147cd1b641375f79f5825126d665480874634fd0ace",
+            expo: -8,
+            decimals: 8,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+          },
+        },
         WBTC: {
           priceFeed: {
             address: "0x0000000000000000000000000000000000000000",

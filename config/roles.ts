@@ -36,16 +36,8 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RolesCon
     "0xFb11f15f206bdA02c224EDC744b0E50E46137046": true,
   };
 
-  const orderKeepers = {
-    "0xD0eBa2DB37513399C22CE3ac7b18412a2f8FD789":true,
-    "0x55F354d85c0E36bFeB1B55668585592455bf3502":true
-  }
 
-  const liquidationKeepers = {
-    "0xD0eBa2DB37513399C22CE3ac7b18412a2f8FD789":true,
-    "0x55F354d85c0E36bFeB1B55668585592455bf3502":true,
-    "0xC7CA0C77B14dF245934365d4fda31F7cE34B659a":true
-  }
+
 
   const testnetConfig = {
     CONTROLLER: testnetAdmins,
@@ -69,11 +61,22 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RolesCon
     },
     "core-testnet": {
       CONTROLLER: { [deployer]: true },
-      ORDER_KEEPER: orderKeepers,
-      ADL_KEEPER: { [deployer]: true },
-      LIQUIDATION_KEEPER: liquidationKeepers,
+      ORDER_KEEPER: {
+        [deployer]: true,
+        "0x55F354d85c0E36bFeB1B55668585592455bf3502": true
+      },
+      ADL_KEEPER: {
+        [deployer]: true,
+        "0x0c80F40C41d6eF5214108c474C148914Fc214049": true
+      },
+      LIQUIDATION_KEEPER: {
+        [deployer]: true,
+        "0x55F354d85c0E36bFeB1B55668585592455bf3502": true,
+        "0xC7CA0C77B14dF245934365d4fda31F7cE34B659a": true
+      },
       MARKET_KEEPER: { [deployer]: true },
       FROZEN_ORDER_KEEPER: { [deployer]: true },
+      FEE_KEEPER: { [deployer]: true },
     },
     arbFork: {
       CONTROLLER: { [deployer]: true },

@@ -96,7 +96,7 @@ const config: HardhatUserConfig = {
     },
     "core-testnet": {
       url: 'https://rpc.test.btcs.network',
-      accounts: [process.env.CORE_TESTNET_DEPLOYER],
+      accounts: [process.env.CORE_TESTNET_DEPLOYER, process.env.CORE_TESTNET_FEE_COLLECTOR],
       chainId: 1115,
     },
     arbFork: {

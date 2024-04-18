@@ -61,6 +61,8 @@ contract Oracle is RoleModule {
     // set in setPrices are cleared after use
     EnumerableSet.AddressSet internal tokensWithPrices;
     mapping(address => Price.Props) public primaryPrices;
+    mapping(address => uint256) public lastPriceUpdateBlock;
+    mapping(address => PythStructs.Price) public blockPriceCache;
 
     constructor(
         RoleStore _roleStore,
@@ -69,7 +71,6 @@ contract Oracle is RoleModule {
     ) RoleModule(_roleStore) {
         pyth = IPyth(_pyth);
         oracleStore = _oracleStore;
-
     }
 
     // @dev validate and store signed prices
@@ -280,14 +281,24 @@ contract Oracle is RoleModule {
 
     // there is a small risk of stale pricing due to latency in price updates or if the chain is down
     // this is meant to be for temporary use until low latency price feeds are supported for all tokens
-    function _getPriceFeedPrice(DataStore dataStore, address token) internal view returns (bool, uint256) {
+    function _getPriceFeedPrice(DataStore dataStore, address token) internal returns (bool, uint256) {
         bytes32 priceFeedId = dataStore.getBytes32(Keys.priceFeedIdKey(token));
 
         if (priceFeedId == bytes32(0)) {
             return (false, 0);
         }
 
-        PythStructs.Price memory currentPrice = pyth.getPrice(priceFeedId);
+        PythStructs.Price memory currentPrice;
+
+
+        if (lastPriceUpdateBlock[token] == block.number) {
+            currentPrice = blockPriceCache[token];
+        } else {
+            currentPrice = pyth.getPrice(priceFeedId);            
+            blockPriceCache[token] = currentPrice;
+            lastPriceUpdateBlock[token] = block.number;
+        }
+
         uint256 timestamp = currentPrice.publishTime;
         int64 _price = currentPrice.price;
 
@@ -324,6 +335,12 @@ contract Oracle is RoleModule {
 
         pyth.updatePriceFeeds{value: updateFee}(pythUpdateData);
 
+        uint excess = msg.value - updateFee;
+
+        if (excess > 0) {
+            (bool success, ) = msg.sender.call{value: excess}("");
+            require(success, "Refund failed");
+        }
         for (uint256 i; i < tokens.length; i++) {
             address token = tokens[i];
 

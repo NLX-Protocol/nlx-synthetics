@@ -335,12 +335,6 @@ contract Oracle is RoleModule {
 
         pyth.updatePriceFeeds{value: updateFee}(pythUpdateData);
 
-        uint excess = msg.value - updateFee;
-
-        if (excess > 0) {
-            (bool success, ) = msg.sender.call{value: excess}("");
-            require(success, "Refund failed");
-        }
         for (uint256 i; i < tokens.length; i++) {
             address token = tokens[i];
 
@@ -375,6 +369,12 @@ contract Oracle is RoleModule {
                 Chain.currentTimestamp(),
                 OracleUtils.PriceSourceType.PriceFeed
             );
+        }
+
+         uint excess = msg.value - updateFee;
+          if (excess > 0) {
+            (bool success, ) = msg.sender.call{value: excess}("");
+            require(success, "Refund failed");
         }
     }
 

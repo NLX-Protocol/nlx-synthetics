@@ -255,12 +255,12 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
       minOracleBlockConfirmations: 255,
       minOracleSigners: 1,
-      // price feeds IDs: https://pyth.network/developers/price-feed-ids#pyth-evm-beta
+      // price feeds IDs: https://pyth.network/developers/price-feed-id
       //price infos(including expo): https://pyth.network/price-feeds
       tokens: {
         WCORE: {
           priceFeed: {
-            address: "0x8034aB88C3512246Bf7894f57C834DdDBd1De01F",
+            address: "0x40375c92d9faf44d2f9db9bd9ba41a3317a2404f",
             priceFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
             expo: -8,
             decimals: 18,

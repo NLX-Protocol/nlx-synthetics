@@ -46,8 +46,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
   }
 
   const generalConfig = {
-    feeReceiver: "0x49FE95FD5C97E79Fdcf5098B3fC43C07C8913d8A",
-    holdingAddress: "0x42a80be7DAf193f5394240c713D95713f00B26e7",
+    feeReceiver: "0xAb8BeB8f451ec94BFF7D58530ee7fF8aE148b7Ae",
+    holdingAddress: "0xAb8BeB8f451ec94BFF7D58530ee7fF8aE148b7Ae",
     maxUiFeeFactor: decimalToFloat(2, 4), // 0.0002, 0.02%
     minHandleExecutionErrorGas: 1_200_000,
     minHandleExecutionErrorGasToForward: 1_000_000, // measured gas required for an order cancellation: ~600,000
@@ -102,12 +102,17 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       estimatedGasFeeBaseAmount: 1_000_000,
       executionGasFeeBaseAmount: 1_000_000,
     },
+    "core-mainnet": {
+      requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds
+      estimatedGasFeeBaseAmount: 1_000_000,
+      executionGasFeeBaseAmount: 1_000_000,
+      // estimatedGasFeeMultiplierFactor: 0, // 1.25x
+    },
     "core-testnet": {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds
       estimatedGasFeeBaseAmount: 1_000_000,
       executionGasFeeBaseAmount: 1_000_000,
       // estimatedGasFeeMultiplierFactor: 0, // 1.25x
-
     },
     hardhat: {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds

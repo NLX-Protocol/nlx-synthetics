@@ -247,6 +247,37 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
         },
       },
     },
+    ["core-mainnet"]: {
+      //pyth contracts: https://docs.pyth.network/price-feeds/contract-addresses/evm
+      pyth: "0xA2aa501b19aff244D90cc15a4Cf739D2725B5729",
+      signers: ["0xC8C63DAB21fd4B9781DE881a8A5Ac2257AE19Bcd"],
+      maxOraclePriceAge: 5 * 60,
+      maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
+      minOracleBlockConfirmations: 255,
+      minOracleSigners: 1,
+      // price feeds IDs: https://pyth.network/developers/price-feed-ids#pyth-evm-beta
+      //price infos(including expo): https://pyth.network/price-feeds
+      tokens: {
+        WCORE: {
+          priceFeed: {
+            address: "0x8034aB88C3512246Bf7894f57C834DdDBd1De01F",
+            priceFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
+            expo: -8,
+            decimals: 18,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+          },
+        },
+        COREBTC: {
+          priceFeed: {
+            address: "0x8034aB88C3512246Bf7894f57C834DdDBd1De01F",
+            priceFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+            expo: -8,
+            decimals: 8,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+          },
+        },
+      },
+    },
     ["core-testnet"]: {
       //pyth contracts: https://docs.pyth.network/price-feeds/contract-addresses/evm
       pyth: "0x8D254a21b3C86D32F7179855531CE99164721933",

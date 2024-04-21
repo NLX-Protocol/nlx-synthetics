@@ -94,9 +94,16 @@ const config: HardhatUserConfig = {
       //   blockNumber: 16669008,
       // },
     },
-    "core-testnet": {
+    ["core-mainnet"]: {
+      url: 'https://rpc.coredao.org',
+      // url: 'https://1rpc.io/core',
+      // url: 'https://rpc.ankr.com/core',
+      accounts: [process.env.CORE_MAINNET_DEPLOYER],
+      chainId: 1116,
+    },
+    ["core-testnet"]: {
       url: 'https://rpc.test.btcs.network',
-      accounts: [process.env.CORE_TESTNET_DEPLOYER, process.env.CORE_TESTNET_FEE_COLLECTOR],
+      accounts: [process.env.CORE_TESTNET_DEPLOYER],
       chainId: 1115,
     },
     arbFork: {

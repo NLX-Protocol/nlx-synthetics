@@ -18,6 +18,7 @@ const rolesToRemove = {
   arbitrumGoerli: [],
   avalancheFuji: [],
   "core-testnet":[],
+  "core-mainnet":[],
   arbFork:[],
   polygonFork:[],
 };

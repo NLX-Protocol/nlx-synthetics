@@ -59,6 +59,24 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RolesCon
       MARKET_KEEPER: { [deployer]: true },
       FROZEN_ORDER_KEEPER: { [deployer]: true },
     },
+    "core-mainnet": {
+      CONTROLLER: { [deployer]: true },
+      ORDER_KEEPER: {
+        [deployer]: true,
+        "0x51bE998d467389F4a2E9482384Ef97Cc777ba1d0": true
+      },
+      ADL_KEEPER: {
+        [deployer]: true,
+        "0x87210e29896A6b0f5fA9Ed2c7eF7eEB58194ddaa": true
+      },
+      LIQUIDATION_KEEPER: {
+        [deployer]: true,
+        "0x2752011ee82A316D246462BDdA0Ba5825A85Ca49": true,
+      },
+      MARKET_KEEPER: { [deployer]: true },
+      FROZEN_ORDER_KEEPER: { [deployer]: true },
+      FEE_KEEPER: { [deployer]: true },
+    },
     "core-testnet": {
       CONTROLLER: { [deployer]: true },
       ORDER_KEEPER: {

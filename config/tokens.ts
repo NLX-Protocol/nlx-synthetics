@@ -294,6 +294,23 @@ const config: {
       synthetic: true,
     },
   },
+  ["core-mainnet"]:{
+    WCORE: {
+      address: "0x40375c92d9faf44d2f9db9bd9ba41a3317a2404f",
+      decimals: 18,
+      wrappedNative: true,
+      transferGasLimit: 200 * 1000,
+      realtimeFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
+      realtimeFeedDecimals: 8,
+    },
+    COREBTC: {
+      decimals: 8,
+      transferGasLimit: 200 * 1000,
+      address: "0x8034aB88C3512246Bf7894f57C834DdDBd1De01F",
+      realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      realtimeFeedDecimals: 8,
+    },
+  },
   ["core-testnet"]: {
     WCORE: {
       deploy: true,

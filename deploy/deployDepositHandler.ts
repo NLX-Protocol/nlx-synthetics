@@ -6,7 +6,7 @@ const constructorContracts = ["RoleStore", "DataStore", "EventEmitter", "Deposit
 const func = createDeployFunction({
   contractName: "DepositHandler",
   dependencyNames: constructorContracts,
-  contractLocation: "contracts/exchange/DepositHandler.sol:DepositHandler",
+  // contractLocation: "contracts/exchange/DepositHandler.sol:DepositHandler",
   getDeployArgs: async ({ dependencyContracts }) => {
     return constructorContracts.map((dependencyName) => dependencyContracts[dependencyName].address);
   },

@@ -1,4 +1,4 @@
-import { setBalance } from "@nomicfoundation/hardhat-network-helpers";
+import { mine, setBalance } from "@nomicfoundation/hardhat-network-helpers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { TokenConfig } from "../config/tokens";
 
@@ -8,7 +8,7 @@ import { expandDecimals } from "../utils/math";
 
 
 const func = async ({ getNamedAccounts, deployments, gmx, network, run }: HardhatRuntimeEnvironment) => {
-  const { deploy, log } = deployments;
+  const { deploy, log, } = deployments;
   const { deployer } = await getNamedAccounts();
   const { getTokens } = gmx;
   const tokens: Record<string, TokenConfig> = await getTokens();
@@ -22,6 +22,23 @@ const func = async ({ getNamedAccounts, deployments, gmx, network, run }: Hardha
       console.warn("WARN: Deploying token on live network");
     }
 
+    let contract = ""
+    let contractLocation = ""
+
+    if (network.name === "localhost" && token.wrappedNative) {
+      contract = "WCORE"
+      contractLocation = "contracts/mock/WCORE.sol:WCORE"
+    } else if (network.name === "core-mainnet" && token.wrappedNative) {
+      contract = "WXCORE"
+      contractLocation = "contracts/mock/WXCORE.sol:WXCORE";
+    } else if ((network.name === "core-testnet" || network.name === "hardhat") && token.wrappedNative)  {
+      contract = "WNT"
+      contractLocation = "contracts/mock/WNT.sol:WNT"
+    }else{
+      contract = "MintableToken"
+      contractLocation = "contracts/mock/MintableToken.sol:MintableToken"
+    }
+
     const existingToken = await deployments.getOrNull(tokenSymbol);
     if (existingToken && network.live) {
       log(`Reusing ${tokenSymbol} at ${existingToken.address}`);
@@ -31,7 +48,7 @@ const func = async ({ getNamedAccounts, deployments, gmx, network, run }: Hardha
 
         console.log(`verifying ${tokenSymbol}...`);
         await run("verify:verify", {
-          contract: token.wrappedNative ? "contracts/mock/WNT.sol:WNT" : "contracts/mock/MintableToken.sol:MintableToken",
+          contract: contractLocation,
           address: existingToken.address,
           constructorArguments: token.wrappedNative ? [] : [tokenSymbol, tokenSymbol, token.decimals]
         });
@@ -43,15 +60,13 @@ const func = async ({ getNamedAccounts, deployments, gmx, network, run }: Hardha
       continue;
     }
 
+  
 
-    
     const { address, newlyDeployed } = await deploy(tokenSymbol, {
       from: deployer,
       log: true,
-      contract: token.wrappedNative ? "WNT" : "MintableToken",
+      contract,
       args: token.wrappedNative ? [] : [tokenSymbol, tokenSymbol, token.decimals],
-      // nonce: nonce + initialNonce
-
     });
 
     tokens[tokenSymbol].address = address;
@@ -59,6 +74,8 @@ const func = async ({ getNamedAccounts, deployments, gmx, network, run }: Hardha
       if (token.wrappedNative && !network.live) {
         await setBalance(address, expandDecimals(1000, token.decimals));
       }
+
+
 
       if (!token.wrappedNative) {
         const tokenContract = await ethers.getContractAt("MintableToken", address);

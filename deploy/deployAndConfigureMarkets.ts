@@ -24,6 +24,7 @@ const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnviro
   for (const marketConfig of markets) {
     const [indexToken, longToken, shortToken] = getMarketTokenAddresses(marketConfig, tokens);
 
+
     const marketKey = getMarketKey(indexToken, longToken, shortToken);
     const onchainMarket = onchainMarketsByTokens[marketKey];
     if (onchainMarket) {
@@ -38,6 +39,7 @@ const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnviro
 
     const marketType = DEFAULT_MARKET_TYPE;
     log("creating market %s:%s:%s:%s", indexToken, longToken, shortToken, marketType);
+
     await execute(
       "MarketFactory",
       { from: deployer, log: true },

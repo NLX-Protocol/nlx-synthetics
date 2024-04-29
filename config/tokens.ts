@@ -295,12 +295,13 @@ const config: {
     },
   },
   ["core-mainnet"]:{
-    WCORE: {
-      address: "0x40375c92d9faf44d2f9db9bd9ba41a3317a2404f",
+    WXCORE: {
       decimals: 18,
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
       realtimeFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
+      // address: "0x191E94fa59739e188dcE837F7f6978d84727AD01",
+      deploy:true,
       realtimeFeedDecimals: 8,
     },
     COREBTC: {
@@ -513,31 +514,25 @@ const config: {
       decimals: 18,
     },
   },
-  localhost: {
-    WETH: {
-      wrappedNative: true,
+  localhost:{
+    WCORE: {
       decimals: 18,
+      wrappedNative: true,
       transferGasLimit: 200 * 1000,
-      deploy: true,
+      realtimeFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
+      // address: "0x191E94fa59739e188dcE837F7f6978d84727AD01",
+      realtimeFeedDecimals: 8,
+      deploy:true,
+      
     },
-    WBTC: {
+    COREBTC: {
       decimals: 8,
       transferGasLimit: 200 * 1000,
-      deploy: true,
-    },
-    USDC: {
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      deploy: true,
-    },
-    USDT: {
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      deploy: true,
-    },
-    SOL: {
-      synthetic: true,
-      decimals: 18,
+      realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      // address: "0x8034aB88C3512246Bf7894f57C834DdDBd1De01F",
+      realtimeFeedDecimals: 8,
+      deploy:true,
+
     },
   },
 };

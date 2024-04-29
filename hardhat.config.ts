@@ -75,27 +75,57 @@ const getEnvAccounts = () => {
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.18",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 10,
-        details: {
-          constantOptimizer: true,
+    compilers: [
+      {
+        version: "0.8.18",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 10,
+            details: {
+              constantOptimizer: true,
+            },
+          },
         },
       },
-    },
+      {
+        version: "0.4.18",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 500,
+            details: {
+              constantOptimizer: true,
+            },
+          },
+        },
+      },
+      {
+        version: "0.6.12"
+      }
+    ],
+
   },
   networks: {
     hardhat: {
       saveDeployments: true,
+      allowUnlimitedContractSize: true,
       // forking: {
-      //   url: `https://rpc.test.btcs.network`,
-      //   blockNumber: 16669008,
+      //   url: 'https://rpc.coredao.org',
+      //   // url: 'http://129.213.109.4:8579/',
+      //   blockNumber: 0,
+      //   enabled: true,
       // },
+      // blockGasLimit:40_000_000,
+      // gas:30000000000,
+      // accounts: [{
+      //   balance: "1000",
+      //   privateKey: process.env.CORE_MAINNET_DEPLOYER
+      // }],
     },
     ["core-mainnet"]: {
-      url: 'https://rpc.coredao.org',
+      url: 'http://129.213.109.4:8579/',
+      // url: 'https://rpc.coredao.org',
       // url: 'https://1rpc.io/core',
       // url: 'https://rpc.ankr.com/core',
       accounts: [process.env.CORE_MAINNET_DEPLOYER],
@@ -118,6 +148,10 @@ const config: HardhatUserConfig = {
     },
     localhost: {
       saveDeployments: true,
+      blockGasLimit:40_000_000,
+      gas:30000000000,
+      allowUnlimitedContractSize: true,
+
     },
     arbitrum: {
       url: getRpcUrl("arbitrum"),

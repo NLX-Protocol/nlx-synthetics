@@ -15,6 +15,8 @@ const func = createDeployFunction({
     "ReaderWithdrawalUtils",
     "ReaderPricingUtils",
   ],
+  contractLocation: "contracts/reader/Reader.sol:Reader",
+
 });
 
 export default func;

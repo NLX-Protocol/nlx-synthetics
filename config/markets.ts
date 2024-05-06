@@ -1253,8 +1253,10 @@ const config: {
 
       ...baseMarketConfig,
 
-      maxLongTokenPoolAmount: expandDecimals(100_000_000, 8),
-      maxShortTokenPoolAmount: expandDecimals(100_000_000, 8),
+      // maxLongTokenPoolAmount: expandDecimals(100_000_000, 8),
+      // maxShortTokenPoolAmount: expandDecimals(100_000_000, 8),
+      maxLongTokenPoolAmount: expandDecimals(87, 8),
+      maxShortTokenPoolAmount: expandDecimals(87, 8),
 
       maxLongTokenPoolAmountForDeposit: expandDecimals(100_000_000, 8),
       maxShortTokenPoolAmountForDeposit: expandDecimals(100_000_000, 8),
@@ -1290,9 +1292,11 @@ const config: {
 
       ...baseMarketConfig,
 
-      maxLongTokenPoolAmount: expandDecimals(100_000_000, 18),
-      maxShortTokenPoolAmount: expandDecimals(100_000_000, 18),
+      maxLongTokenPoolAmount: expandDecimals(2_700_000, 18),
+      maxShortTokenPoolAmount: expandDecimals(2_700_000, 18),
 
+      // maxLongTokenPoolAmount: expandDecimals(100_000_000, 18),
+      // maxShortTokenPoolAmount: expandDecimals(100_000_000, 18),
       maxLongTokenPoolAmountForDeposit: expandDecimals(100_000_000, 18),
       maxShortTokenPoolAmountForDeposit: expandDecimals(100_000_000, 18),
 

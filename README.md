@@ -1,6 +1,6 @@
-# GMX Synthetics
+# NLX Synthetics
 
-Contracts for GMX Synthetics.
+Contracts for NLX Synthetics.
 
 # General Overview
 

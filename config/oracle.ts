@@ -299,6 +299,15 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
+        aBTC: {
+          priceFeed: {
+            address: "0x0000000000000000000000000000000000000000",
+            priceFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+            expo: -8,
+            decimals: 18,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+          },
+        },
       },
     },
     ["core-testnet"]: {
@@ -309,7 +318,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
       minOracleBlockConfirmations: 255,
       minOracleSigners: 1,
-      // price feeds IDs: https://pyth.network/developers/price-feed-ids#pyth-evm-beta
+      // price feeds IDs: https://pyth.network/developers/price-feed-id
       //price infos(including expo): https://pyth.network/price-feeds
       tokens: {
         WCORE: {
@@ -339,6 +348,15 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
+        ABTC: {
+          priceFeed: {
+            address: "0x0000000000000000000000000000000000000000",
+            priceFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+            expo: -8,
+            decimals: 8,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+          },
+        },
         SOL: {
           priceFeed: {
             address: "0x0000000000000000000000000000000000000000",
@@ -357,26 +375,26 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
             heartbeatDuration: (24 + 1) * 60 * 60,
           },
         },
-        // USDC: {
-        //   priceFeed: {
-        //     address: "0x0000000000000000000000000000000000000000",
-        //     priceFeedId: "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a",
-        //     expo: -8,
-        //     decimals: 8,
-        //     heartbeatDuration: (24 + 1) * 60 * 60,
-        //     stablePrice: decimalToFloat(1),
-        //   },
-        // },
-        // USDT: {
-        //   priceFeed: {
-        //     address: "0x0000000000000000000000000000000000000000",
-        //     priceFeedId: "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
-        //     expo: -8,
-        //     decimals: 8,
-        //     heartbeatDuration: (24 + 1) * 60 * 60,
-        //     stablePrice: decimalToFloat(1),
-        //   },
-        // },
+        USDC: {
+          priceFeed: {
+            address: "0x0000000000000000000000000000000000000000",
+            priceFeedId: "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a",
+            expo: -8,
+            decimals: 8,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+            stablePrice: decimalToFloat(1),
+          },
+        },
+        USDT: {
+          priceFeed: {
+            address: "0x0000000000000000000000000000000000000000",
+            priceFeedId: "0x2b89b9dc8fdf9f34709a5b106b472f0f39bb6ca9ce04b0fd7f2e971688e2e53b",
+            expo: -8,
+            decimals: 8,
+            heartbeatDuration: (24 + 1) * 60 * 60,
+            stablePrice: decimalToFloat(1),
+          },
+        },
        
       },
     },

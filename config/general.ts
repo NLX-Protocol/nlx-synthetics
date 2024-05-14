@@ -112,7 +112,9 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds
       estimatedGasFeeBaseAmount: 1_000_000,
       executionGasFeeBaseAmount: 1_000_000,
-      // estimatedGasFeeMultiplierFactor: 0, // 1.25x
+      positionFeeReceiverFactor: decimalToFloat(50, 2), // 50%
+      swapFeeReceiverFactor: decimalToFloat(50, 2), // 50%
+      borrowingFeeReceiverFactor: decimalToFloat(50, 2), // 50%
     },
     "core-testnet": {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds

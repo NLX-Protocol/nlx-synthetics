@@ -311,6 +311,13 @@ const config: {
       realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
       realtimeFeedDecimals: 8,
     },
+    aBTC: {
+      decimals: 18,
+      transferGasLimit: 200 * 1000,
+      address: "0x20F1c5a4051754500D729d9B53bB1C359b7f1883",
+      realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      realtimeFeedDecimals: 8,
+    },
   },
   ["core-testnet"]: {
     WCORE: {
@@ -329,6 +336,11 @@ const config: {
       transferGasLimit: 200 * 1000,
       deploy: true
     },
+    ABTC: {
+      decimals: 8,
+      transferGasLimit: 200 * 1000,
+      deploy: true
+    },
     SOL: {
       synthetic: true,
       decimals: 9,
@@ -338,16 +350,16 @@ const config: {
       transferGasLimit: 200 * 1000,
       decimals: 5,
     },
-    // USDC: {
-    //   decimals: 6,
-    //   transferGasLimit: 200 * 1000,
-    //   deploy: true,
-    // },
-    // USDT: {
-    //   decimals: 6,
-    //   transferGasLimit: 200 * 1000,
-    //   deploy: true,
-    // },
+    USDC: {
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      deploy: true,
+    },
+    USDT: {
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      deploy: true,
+    },
   },
   arbFork: {
     WCORE: {

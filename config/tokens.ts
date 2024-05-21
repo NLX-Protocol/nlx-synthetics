@@ -380,7 +380,7 @@ const config: {
     },
     SOL: {
       synthetic: true,
-      decimals: 8,
+      decimals: 9,
     },
     USDC: {
       decimals: 6,

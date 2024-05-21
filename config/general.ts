@@ -46,8 +46,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
   }
 
   const generalConfig = {
-    feeReceiver: "0xAb8BeB8f451ec94BFF7D58530ee7fF8aE148b7Ae",
-    holdingAddress: "0xAb8BeB8f451ec94BFF7D58530ee7fF8aE148b7Ae",
+    feeReceiver: "0x5f691a2fbE080E32871fdaF9a4CbFf81be119cB0",
+    holdingAddress: "0x5f691a2fbE080E32871fdaF9a4CbFf81be119cB0",
     maxUiFeeFactor: decimalToFloat(2, 4), // 0.0002, 0.02%
     minHandleExecutionErrorGas: 1_200_000,
     minHandleExecutionErrorGasToForward: 1_000_000, // measured gas required for an order cancellation: ~600,000
@@ -110,17 +110,23 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
     },
     "core-mainnet": {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds
-      estimatedGasFeeBaseAmount: 1_000_000,
-      executionGasFeeBaseAmount: 1_000_000,
       positionFeeReceiverFactor: decimalToFloat(50, 2), // 50%
       swapFeeReceiverFactor: decimalToFloat(50, 2), // 50%
       borrowingFeeReceiverFactor: decimalToFloat(50, 2), // 50%
+      estimatedGasFeeBaseAmount: 1_500_000,
+      executionGasFeeBaseAmount: 1_500_000,
+      estimatedGasFeeMultiplierFactor: expandDecimals(175, 28), // 1.75x
+      executionGasFeeMultiplierFactor: expandDecimals(175, 28), // 1.75x,
     },
     "core-testnet": {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds
-      estimatedGasFeeBaseAmount: 1_000_000,
-      executionGasFeeBaseAmount: 1_000_000,
-      // estimatedGasFeeMultiplierFactor: 0, // 1.25x
+      positionFeeReceiverFactor: decimalToFloat(50, 2), // 50%
+      swapFeeReceiverFactor: decimalToFloat(50, 2), // 50%
+      borrowingFeeReceiverFactor: decimalToFloat(50, 2), // 50%
+      estimatedGasFeeBaseAmount: 1_500_000,
+      executionGasFeeBaseAmount: 1_500_000,
+      estimatedGasFeeMultiplierFactor: expandDecimals(175, 28), // 1.75x
+      executionGasFeeMultiplierFactor: expandDecimals(175, 28), // 1.75x,
     },
     hardhat: {
       requestExpirationBlockAge: 150, // about 5 minutes assuming 1 block per 2 seconds

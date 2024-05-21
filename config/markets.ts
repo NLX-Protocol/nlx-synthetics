@@ -1631,36 +1631,27 @@ const config: {
       maxLongTokenPoolAmountForDeposit: expandDecimals(10_000_000, 8),
       maxShortTokenPoolAmountForDeposit: expandDecimals(10_000_000, 8),
 
-      negativePositionImpactFactor: decimalToFloat(28, 9),
-      positivePositionImpactFactor: decimalToFloat(14, 9),
+      reserveFactorLongs: decimalToFloat(9, 1), // 90%,
+      reserveFactorShorts: decimalToFloat(9, 1), // 90%,
 
-      // the swap impact factor is for WETH-stablecoin swaps
-      negativeSwapImpactFactor: decimalToFloat(5, 9), // 0.05% for 100,000 USD of imbalance
-      positiveSwapImpactFactor: decimalToFloat(5, 9), // 0.05% for 100,000 USD of imbalance
+      openInterestReserveFactorLongs: decimalToFloat(8, 1), // 80%,
+      openInterestReserveFactorShorts: decimalToFloat(8, 1), // 80%,
 
-      // minCollateralFactor of 0.01 (1%) when open interest is 5,000,000 USD
-      minCollateralFactorForOpenInterestMultiplierLong: decimalToFloat(2, 9),
-      minCollateralFactorForOpenInterestMultiplierShort: decimalToFloat(2, 9),
+      negativePositionImpactFactor: decimalToFloat(15, 11), // 0.05% for ~1,600,000 USD of imbalance
+      // negativePositionImpactFactor: decimalToFloat(15, 11), // 0.05% for ~1,600,000 USD of imbalance
+      positivePositionImpactFactor: decimalToFloat(15, 11), // 0.05% for ~2,700,000 USD of imbalance
 
-      openInterestReserveFactorLongs: decimalToFloat(75, 2), // 75%,
-      openInterestReserveFactorShorts: decimalToFloat(75, 2), // 75%,
+      negativeSwapImpactFactor: decimalToFloat(24, 11), // 0.05% for ~2,100,000 USD of imbalance
+      positiveSwapImpactFactor: decimalToFloat(24, 11), // 0.05% for ~2,100,000 USD of imbalance
 
-      // factor in open interest reserve factor 75%
-      borrowingFactorForLongs: decimalToFloat(225, 13), // 2.25E-11, ~40.77% at 100% utilisation
-      borrowingFactorForShorts: decimalToFloat(225, 13), // 2.25E-11, ~40.77% at 100% utilisation
-      borrowingExponentFactorForLongs: decimalToFloat(15, 1), // 1.5
-      borrowingExponentFactorForShorts: decimalToFloat(15, 1), // 1.5
+      // minCollateralFactor of 0.01 (1%) when open interest is 50,000,000 USD
+      minCollateralFactorForOpenInterestMultiplierLong: decimalToFloat(2, 10),
+      minCollateralFactorForOpenInterestMultiplierShort: decimalToFloat(2, 10),
 
-      positionImpactPoolDistributionRate: expandDecimals(6666, 30), // ~576 XRP/day
-      minPositionImpactPoolAmount: expandDecimals(671, 6),
-
-      // maxOpenInterestForLongs: decimalToFloat(1_000_000),
-      // maxOpenInterestForShorts: decimalToFloat(1_000_000),
-
-      fundingIncreaseFactorPerSecond: decimalToFloat(16, 13), // 0.0000000000016, at least 3.5 hours to reach max funding
+      fundingIncreaseFactorPerSecond: decimalToFloat(8, 13), // 0.0000000000008, at least 3.5 hours to reach max funding
       fundingDecreaseFactorPerSecond: decimalToFloat(0), // not applicable if thresholdForDecreaseFunding = 0
       minFundingFactorPerSecond: decimalToFloat(3, 10), // 0.00000003%, 0.000108% per hour, 0.95% per year
-      maxFundingFactorPerSecond: decimalToFloat(2, 8), // 0.000002%,  0.0072% per hour, 63% per year
+      maxFundingFactorPerSecond: decimalToFloat(1, 8), // 0.000001%,  0.0036% per hour, 31.5% per year
       thresholdForStableFunding: decimalToFloat(5, 2), // 5%
       thresholdForDecreaseFunding: decimalToFloat(0), // 0%
     },

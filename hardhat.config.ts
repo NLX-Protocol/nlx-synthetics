@@ -106,13 +106,19 @@ const config: HardhatUserConfig = {
     ],
 
   },
+  paths: {
+    sources: './contracts',
+    cache: './cache',
+    artifacts: './artifacts',
+ },
   networks: {
     hardhat: {
       saveDeployments: true,
       allowUnlimitedContractSize: true,
       // forking: {
       //   url: 'https://rpc.coredao.org',
-      //   // url: 'http://129.213.109.4:8579/',
+      //   // url: 'http://129.213.109.4:8579/', # https://rpc.coredao.org	
+      //   // url: 'https://nlxrpc.up.railway.app/api/', # https://rpc.coredao.org	
       //   blockNumber: 0,
       //   enabled: true,
       // },
@@ -124,7 +130,8 @@ const config: HardhatUserConfig = {
       // }],
     },
     ["core-mainnet"]: {
-      url: 'http://129.213.109.4:8579/',
+      url: 'https://nlxrpc.up.railway.app/api/',
+      // url: 'https://193.122.158.161:8579/',
       // url: 'https://rpc.coredao.org',
       // url: 'https://1rpc.io/core',
       // url: 'https://rpc.ankr.com/core',
@@ -136,11 +143,11 @@ const config: HardhatUserConfig = {
       accounts: [process.env.CORE_TESTNET_DEPLOYER],
       chainId: 1115,
     },
-    arbFork: {
-      url: 'https://rpc.tenderly.co/fork/e7050279-42e2-4287-81b7-91fe80a02c8c',
-      accounts: [process.env.CORE_TESTNET_DEPLOYER],
-      chainId: 42161,
-    },
+    // arbFork: {
+    //   url: 'https://rpc.tenderly.co/fork/e7050279-42e2-4287-81b7-91fe80a02c8c',
+    //   accounts: [process.env.CORE_TESTNET_DEPLOYER],
+    //   chainId: 42161,
+    // },
     polygonFork: {
       url: 'https://rpc.tenderly.co/fork/1bc4953d-dd23-489b-8bf6-cb97af414cef',
       accounts: [process.env.CORE_TESTNET_DEPLOYER],
@@ -219,8 +226,8 @@ const config: HardhatUserConfig = {
       avalancheFujiTestnet: process.env.SNOWTRACE_API_KEY,
       snowtrace: "snowtrace", // apiKey is not required, just set a placeholder
       "core-testnet": process.env.CORE_TESTNET_API_KEY,
-      arbFork: process.env.CORE_TESTNET_API_KEY,
-      polygonFork: process.env.CORE_TESTNET_API_KEY,
+      // arbFork: process.env.CORE_TESTNET_API_KEY,
+      // polygonFork: process.env.CORE_TESTNET_API_KEY,
       "core-mainnet": process.env.CORE_MAINNET_API_KEY,
     },
     customChains: [

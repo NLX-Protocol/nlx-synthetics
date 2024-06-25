@@ -21,7 +21,7 @@ const func = createDeployFunction({
     await grantRoleIfNotGranted(deployedContract.address, "CONTROLLER");
     await grantRoleIfNotGranted(deployedContract.address, "ROUTER_PLUGIN");
   },
-  // id: "SubaccountRouter_1",
+  id: "SubaccountRouter_1",
 });
 
 export default func;

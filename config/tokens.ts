@@ -294,16 +294,17 @@ const config: {
       synthetic: true,
     },
   },
-  ["core-mainnet"]:{
+  ["core-mainnet"]: {
     WXCORE: {
       decimals: 18,
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
       realtimeFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
-      // address: "0x191E94fa59739e188dcE837F7f6978d84727AD01",
-      deploy:true,
+      address: "0x2c6bcf5990cc115984F0031D613aF1a645089aD6",
+      // deploy: true,
       realtimeFeedDecimals: 8,
     },
+
     COREBTC: {
       decimals: 8,
       transferGasLimit: 200 * 1000,
@@ -316,6 +317,27 @@ const config: {
       transferGasLimit: 200 * 1000,
       address: "0x20F1c5a4051754500D729d9B53bB1C359b7f1883",
       realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      realtimeFeedDecimals: 8,
+    },
+    WBTC: {
+      decimals: 8,
+      transferGasLimit: 200 * 1000,
+      realtimeFeedId: "0xc9d8b075a5c69303365ae23633d4e085199bf5c520a3b90fed1322a0342ffc33",
+      address: "0x5832f53d147b3d6cd4578b9cbd62425c7ea9d0bd",
+      realtimeFeedDecimals: 8,
+    },
+    "solvBTC.b": {
+      decimals: 18,
+      transferGasLimit: 2000 * 1000,
+      realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      address: "0x5b1fb849f1f76217246b8aaac053b5c7b15b7dc3",
+      realtimeFeedDecimals: 8,
+    },
+    "solvBTC.m": {
+      decimals: 18,
+      transferGasLimit: 2000 * 1000,
+      realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
+      address: "0xe04d21d999FaEDf1e72AdE6629e20A11a1ed14FA",
       realtimeFeedDecimals: 8,
     },
   },
@@ -526,7 +548,7 @@ const config: {
       decimals: 18,
     },
   },
-  localhost:{
+  localhost: {
     WCORE: {
       decimals: 18,
       wrappedNative: true,
@@ -534,8 +556,8 @@ const config: {
       realtimeFeedId: "0x9b4503710cc8c53f75c30e6e4fda1a7064680ef2e0ee97acd2e3a7c37b3c830c",
       // address: "0x191E94fa59739e188dcE837F7f6978d84727AD01",
       realtimeFeedDecimals: 8,
-      deploy:true,
-      
+      deploy: true,
+
     },
     COREBTC: {
       decimals: 8,
@@ -543,7 +565,7 @@ const config: {
       realtimeFeedId: "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43",
       // address: "0x8034aB88C3512246Bf7894f57C834DdDBd1De01F",
       realtimeFeedDecimals: 8,
-      deploy:true,
+      deploy: true,
 
     },
   },

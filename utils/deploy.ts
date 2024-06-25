@@ -73,11 +73,14 @@ export function createDeployFunction({
     let deployedContract: DeployResult;
 
     try {
+      // console.log(deployArgs);
+      
       deployedContract = await deploy(contractName, {
         from: deployer,
         log: true,
         args: deployArgs,
         libraries,
+        skipIfAlreadyDeployed:true
       });
 
     } catch (e) {

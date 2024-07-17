@@ -8,4 +8,4 @@ Help improve the developer experience for builders connecting to NLX by building
     - Include ReadMe file with proper documentation
     - Submit project as pull request [here](https://github.com/NLX-Protocol/nlx-synthetics/tree/main/sdk)
 
-_You may change this ReadMe File_
+_You may change this ReadMe file_

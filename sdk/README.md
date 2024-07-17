@@ -6,4 +6,6 @@ Help improve the developer experience for builders connecting to NLX by building
     - Develop the SDK/library in JS/TS
     - Fully Open Source
     - Include ReadMe file with proper documentation
-    - Submit project as pull request here: 
+    - Submit project as pull request [here](https://github.com/NLX-Protocol/nlx-synthetics/tree/main/sdk)
+
+_You may change this ReadMe File_
